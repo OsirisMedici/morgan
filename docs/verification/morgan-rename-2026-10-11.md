@@ -6,6 +6,8 @@
 - Installed `/Applications/Morgan.app` and verified its code signature. Preserved the prior app recoverably at `/Users/osirismedici/Desktop/code projects/clicky-personal/build/backups/Clicky Personal.app.backup`.
 - The renamed app's smoke test passed POINT parsing, a real Codex screenshot request that located the Crop button at 1040,115 in five seconds, and native Mac speech playback. See `morgan-smoke-test.log`.
 - HeyClicky's executable SHA-256 remained `970569210a71cf1f39790f7d0fc02af2a1d64bacf0259d4741f0fa63e53dbb31` before and after installation.
-- Current source contained no credential-pattern matches. Two older upstream commits contained such strings. The private project starts with a clean source snapshot and preserves the original clone locally rather than pushing that old history.
+- Current source contained no credential-pattern matches. Two older upstream commits contained such strings. The project starts with a clean source snapshot and preserves the original clone locally rather than pushing that old history.
 
-Live microphone, global shortcut, and screenshot use require restoring the four macOS grants for Morgan. The previous personal version's live acceptance remains in `2026-10-11.md`. Repository privacy and remote commit verification are recorded after the push completes.
+Live microphone, global shortcut, and screenshot use require restoring the four macOS grants for Morgan. The previous personal version's live acceptance remains in `2026-10-11.md`. Osiris requested stopping further app tests and pushing all code, then changed repository visibility to public and requested a profile pin. Remote visibility and pushed-commit readback are recorded after publication completes.
+
+The installed assistant introduced itself in its panel as "i’m morgan, your friendly companion who lives in your menu bar." No further app tests or permission changes were attempted after Osiris asked to stop testing.

@@ -1,6 +1,6 @@
 # Morgan
 
-A personal Mac assistant, based on [Farza's Clicky](https://github.com/farzaa/clicky), starting at `a80fa80721a8aebe51a170a7780705024ebc6e46`. The complete current upstream source is retained. This private repository starts with a clean snapshot because older public Git history contains credential strings. The original full-history clone remains locally at `/Users/osirismedici/Desktop/code projects/clicky-personal`. This is the public original, not the newer private HeyClicky app.
+A personal Mac assistant, based on [Farza's Clicky](https://github.com/farzaa/clicky), starting at `a80fa80721a8aebe51a170a7780705024ebc6e46`. The complete current upstream source is retained. This repository starts with a clean snapshot because older public Git history contains credential strings. The original full-history clone remains locally at `/Users/osirismedici/Desktop/code projects/clicky-personal`. This is the public original, not the newer private HeyClicky app.
 
 ## Intended experience
 
@@ -39,7 +39,7 @@ This fork implements the earlier screenshot-based teaching companion. It does no
 
 ## Continue work
 
-- Private repository: https://github.com/OsirisMedici/morgan
+- Public repository: https://github.com/OsirisMedici/morgan
 - Local checkout: `/Users/osirismedici/Desktop/code projects/morgan`
 - Installed application: `/Applications/Morgan.app`
 - Start with `docs/PROJECT_STATE.md` for the current scope, `docs/DECISIONS.md` for rationale, and `docs/ROADMAP.md` for proposed next work.

@@ -4,7 +4,7 @@ Updated 11 October 2026.
 
 ## Outcome
 
-Osiris can ask spoken questions about the screen, hear an answer through a Mac voice, and see the original blue companion point to relevant controls. Morgan uses the existing Codex ChatGPT sign-in and has editable source in a private GitHub repository. HeyClicky remains a separate application.
+Osiris can ask spoken questions about the screen, hear an answer through a Mac voice, and see the original blue companion point to relevant controls. Morgan uses the existing Codex ChatGPT sign-in and has editable source in a public GitHub repository. HeyClicky remains a separate application.
 
 ## Current implementation
 

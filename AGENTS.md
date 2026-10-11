@@ -2,7 +2,7 @@
 
 ## Personal fork
 
-This checkout is Osiris's private Morgan project. Before modifying or building it, read `README.md` for the active architecture, build script, permissions, and acceptance steps. Use `scripts/build-personal.sh` for the installed Mac version. Preserve the separate `/Applications/HeyClicky.app` installation. The historical upstream description below explains the original code; its Cloudflare, Claude, AssemblyAI, ElevenLabs, analytics, and onboarding setup are not the active personal build.
+This checkout is Osiris's Morgan project. Before modifying or building it, read `README.md` for the active architecture, build script, permissions, and acceptance steps. Use `scripts/build-personal.sh` for the installed Mac version. Preserve the separate `/Applications/HeyClicky.app` installation. The historical upstream description below explains the original code; its Cloudflare, Claude, AssemblyAI, ElevenLabs, analytics, and onboarding setup are not the active personal build.
 
 Read `docs/PROJECT_STATE.md` before continuing product work, and `docs/DECISIONS.md` before changing identity, authentication, permissions, or release behavior.
 
