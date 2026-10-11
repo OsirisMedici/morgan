@@ -25,7 +25,7 @@ It has no active autonomous computer-use agent, external app integrations, sched
 
 ## Locations
 
-- Repository: https://github.com/OsirisMedici/morgan, private.
+- Repository: https://github.com/OsirisMedici/morgan, public.
 - Checkout: `/Users/osirismedici/Desktop/code projects/morgan`.
 - Installed app: `/Applications/Morgan.app`.
 - Original full-history local clone: `/Users/osirismedici/Desktop/code projects/clicky-personal`.

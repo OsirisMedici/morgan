@@ -2,7 +2,7 @@
 
 ## Name and repository
 
-Osiris selected Morgan on 11 October 2026 and explicitly requested renaming Clicky Personal, creating a public GitHub repository, and pushing its complete code and documentation. The repository name is `OsirisMedici/morgan`. Osiris subsequently changed the visibility request to public and asked to pin it on his GitHub profile. This later instruction supersedes the initial private-repository request.
+Osiris selected Morgan on 11 October 2026 and explicitly requested renaming Clicky Personal, creating a private GitHub repository, and pushing its complete code and documentation. The repository name is `OsirisMedici/morgan`. Osiris subsequently changed the visibility request to public and asked to pin it on his GitHub profile. This later instruction supersedes the initial private-repository request.
 
 The repository begins with a clean current source snapshot. A scan found no credential-pattern matches in current tracked source, but two earlier upstream commits contain credential strings. Those old commits are not pushed. The original full-history clone stays locally for provenance, and the original README, MIT license, and source research preserve attribution.
 

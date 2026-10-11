@@ -10,7 +10,7 @@ Both provide the basic experience of asking about the screen, hearing an answer,
 | Guidance | Published drawings and step-by-step walkthroughs | Screenshot context and a blue pointing cursor |
 | Memory | Published persistent preferences and project context | Ten text exchanges in RAM, cleared at quit |
 | Actions | Published agents, app integrations, and routines | Explanation and pointing; action tools disabled |
-| Editing | Private current product | Editable source in Osiris's private repo |
+| Editing | Private current product | Editable source in Osiris's public repo |
 | Maintenance | Vendor updates and fixes | Local builds and project-owned maintenance |
 | Cost | Pro advertises $20/month with unlimited talk and capped agent messages | Existing Codex allowance, with no separate speech-provider subscription |
 
