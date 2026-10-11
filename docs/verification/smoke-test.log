@@ -1,0 +1,8 @@
+🎙️ Transcription: using Apple Speech
+🎯 Clicky: Starting...
+🎯 Clicky: Version 0.1.0
+PASS: POINT parser, speech text separation, secondary-screen tag
+PASS: Existing Codex account answered synthetic screenshot in 5s
+PASS: Located Crop button at 1040,115
+PASS: Mac speech playback completed
+PERSONAL_SMOKE_TEST_PASSED
