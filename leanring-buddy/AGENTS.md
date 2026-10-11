@@ -1,6 +1,6 @@
 # Personal fork
 
-Read `../README.PERSONAL.md` for active services and use `../scripts/build-personal.sh`. The floating-session files listed below are historical upstream notes. This fork uses the menu-bar companion and transparent blue cursor overlay.
+Read `../README.md` for active services and use `../scripts/build-personal.sh`. The floating-session files listed below are historical upstream notes. This fork uses the menu-bar companion and transparent blue cursor overlay.
 
 # AGENTS.md - leanring-buddy (Main App Target)
 

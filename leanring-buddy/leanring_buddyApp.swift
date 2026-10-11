@@ -33,8 +33,8 @@ final class CompanionAppDelegate: NSObject, NSApplicationDelegate {
     private let companionManager = CompanionManager()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        print("🎯 Clicky: Starting...")
-        print("🎯 Clicky: Version \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown")")
+        print("🎯 Morgan: Starting...")
+        print("🎯 Morgan: Version \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown")")
 
         if ProcessInfo.processInfo.arguments.contains("--self-test") {
             Task { await PersonalSmokeTests.run() }
@@ -68,9 +68,9 @@ final class CompanionAppDelegate: NSObject, NSApplicationDelegate {
         if loginItemService.status != .enabled {
             do {
                 try loginItemService.register()
-                print("🎯 Clicky: Registered as login item")
+                print("🎯 Morgan: Registered as login item")
             } catch {
-                print("⚠️ Clicky: Failed to register as login item: \(error)")
+                print("⚠️ Morgan: Failed to register as login item: \(error)")
             }
         }
     }

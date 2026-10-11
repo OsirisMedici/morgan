@@ -1,162 +1,48 @@
-Update: April 27, 2026.
+# Morgan
 
-Hi there! I'm Farza, the guy that made Clicky.
+A personal Mac assistant, based on [Farza's Clicky](https://github.com/farzaa/clicky), starting at `a80fa80721a8aebe51a170a7780705024ebc6e46`. The complete current upstream source is retained. This private repository starts with a clean snapshot because older public Git history contains credential strings. The original full-history clone remains locally at `/Users/osirismedici/Desktop/code projects/clicky-personal`. This is the public original, not the newer private HeyClicky app.
 
-The existing codebase remains open source. Tinker with it, make it yours, start a company out of it, do whatever you want I don't mind. But, for all the new stuff I'm hacking on, gonna keep it private. To get the latest Clicky, you can go [here](https://www.heyclicky.com/).
+## Intended experience
 
-I also tweeted about this [here](https://x.com/FarzaTV/status/2043402737828962489).
+Hold **Shift + Control + Space**, ask about the screen, and release. Apple Speech transcribes the question. The installed Codex CLI answers using its existing ChatGPT sign-in, and the original blue companion points to the returned coordinates. A Mac voice reads the answer. Typed questions and a voice test are available from the menu bar.
 
-Go crazy with this repo!! It's an MIT license.
+This build keeps `/Applications/HeyClicky.app` separate. Morgan retains the legacy bundle identifier `com.osiris.clickypersonal` and preference keys from Clicky Personal for continuity. HeyClicky has a separate identity. macOS may still require permission reapproval after a rebuild because the local signature changes. It starts only when opened and does not register a login item. The menu bar icon is a cursor with rays.
 
-# Hi, this is Clicky.
-It's an AI teacher that lives as a buddy next to your cursor. It can see your screen, talk to you, and even point at stuff. Kinda like having a real teacher next to you.
+## Build and run
 
-Download it [here](https://www.clicky.so/) for free.
+Use `scripts/build-personal.sh` with Apple's Command Line Tools. Full Xcode is unnecessary for this build. The script compiles the existing Swift sources and additions into `build/morgan/Morgan.app`, then signs it locally. Open the installed `/Applications/Morgan.app`.
 
-Here's the [original tweet](https://x.com/FarzaTV/status/2041314633978659092) that kinda blew up for a demo for more context.
+The original Xcode project, upstream providers, Worker, release scripts, assets, and MIT license remain in the source repository. The original README is preserved at `docs/upstream/README.md`. The original release script is not the personal build script and is not used to publish this app.
 
-![Clicky — an ai buddy that lives on your mac](clicky-demo.gif)
+## Active services
 
-This is the open-source version of Clicky for those that want to hack on it, build their own features, or just see how it works under the hood.
+- `CodexCLIClient.swift` starts `codex exec` per question, with `--ephemeral`, a read-only sandbox, user config ignored, and shell, apps, plugins, web search, and delegation disabled. The app supplies only the current images and last ten text exchanges. Temporary image and output files are removed when each request completes. The app never reads or copies the Codex token. Inherited API-key variables are removed so they cannot silently change the billing route.
+- `AppleSpeechTranscriptionProvider.swift` is selected by the bundle configuration. Recognition uses on-device mode when the selected language supports it; otherwise Apple's framework may use its service. Speech recognition and microphone access require the user's macOS grants.
+- `MacVoiceClient.swift` uses `AVSpeechSynthesizer` and installed Mac voices. Speaking uses no speech-service key.
+- `CompanionManager.swift` coordinates input, capture, ten-exchange memory, Codex output, POINT parsing, display coordinate mapping, voice, interruption, and errors.
+- `CompanionPanelView.swift` provides permission controls, typed questions, optional screen context, a voice test, answer text, and a stop button.
+- `ClickyAnalytics.swift` retains the original hook names as no-ops. The personal build has no PostHog connection or email signup.
 
-## Get started with Claude Code
+Questions consume the existing Codex plan allowance. This is not unlimited model access. The CLI is already signed in with ChatGPT on this Mac; verify future auth changes with `codex login status`.
 
-The fastest way to get this running is with [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
+## Verification
 
-Once you get Claude running, paste this:
+The app executable accepts `--self-test`. It checks POINT parsing, sends a generated practice screen with a purple Crop button through the real Codex client, verifies the returned location, and awaits completion of native speech playback. No personal screen or microphone recording is used by this smoke test.
 
-```
-Hi Claude.
+Live screen capture, dictation, and the global shortcut need separate permissions for this app. In its panel, grant Microphone, Speech recognition, Screen recording, and Accessibility. macOS may require quitting and reopening the app after Screen recording is granted. Click **Test Mac voice**, then hold Shift + Control + Space over an ordinary app and ask where a visible control is. Release and check both the spoken answer and pointer. Press the shortcut again or **Stop** to interrupt.
 
-Clone https://github.com/farzaa/clicky.git into my current directory.
+The first installed version was accepted on 11 October 2026. See `docs/verification/2026-10-11.md` for the exact automated checks, saved permission states, and user-confirmed voice/pointing test.
 
-Then read the CLAUDE.md. I want to get Clicky running locally on my Mac.
+## Limits
 
-Help me set up everything — the Cloudflare Worker with my own API keys, the proxy URLs, and getting it building in Xcode. Walk me through it.
-```
+This fork implements the earlier screenshot-based teaching companion. It does not include the latest private HeyClicky autonomous agents or integrations. Using Mac speech may change recognition accuracy and voice quality. Codex CLI startup adds latency per question. The app is locally signed rather than Apple-notarized; rebuilding may cause macOS to require permission grants again.
 
-That's it. It'll clone the repo, read the docs, and walk you through the whole setup. Once you're running you can just keep talking to it — build features, fix bugs, whatever. Go crazy.
+## Continue work
 
-## Manual setup
+- Private repository: https://github.com/OsirisMedici/morgan
+- Local checkout: `/Users/osirismedici/Desktop/code projects/morgan`
+- Installed application: `/Applications/Morgan.app`
+- Start with `docs/PROJECT_STATE.md` for the current scope, `docs/DECISIONS.md` for rationale, and `docs/ROADMAP.md` for proposed next work.
+- The original architectural research is in `docs/research/clicky-how-it-works.md`.
 
-If you want to do it yourself, here's the deal.
-
-### Prerequisites
-
-- macOS 14.2+ (for ScreenCaptureKit)
-- Xcode 15+
-- Node.js 18+ (for the Cloudflare Worker)
-- A [Cloudflare](https://cloudflare.com) account (free tier works)
-- API keys for: [Anthropic](https://console.anthropic.com), [AssemblyAI](https://www.assemblyai.com), [ElevenLabs](https://elevenlabs.io)
-
-### 1. Set up the Cloudflare Worker
-
-The Worker is a tiny proxy that holds your API keys. The app talks to the Worker, the Worker talks to the APIs. This way your keys never ship in the app binary.
-
-```bash
-cd worker
-npm install
-```
-
-Now add your secrets. Wrangler will prompt you to paste each one:
-
-```bash
-npx wrangler secret put ANTHROPIC_API_KEY
-npx wrangler secret put ASSEMBLYAI_API_KEY
-npx wrangler secret put ELEVENLABS_API_KEY
-```
-
-For the ElevenLabs voice ID, open `wrangler.toml` and set it there (it's not sensitive):
-
-```toml
-[vars]
-ELEVENLABS_VOICE_ID = "your-voice-id-here"
-```
-
-Deploy it:
-
-```bash
-npx wrangler deploy
-```
-
-It'll give you a URL like `https://your-worker-name.your-subdomain.workers.dev`. Copy that.
-
-### 2. Run the Worker locally (for development)
-
-If you want to test changes to the Worker without deploying:
-
-```bash
-cd worker
-npx wrangler dev
-```
-
-This starts a local server (usually `http://localhost:8787`) that behaves exactly like the deployed Worker. You'll need to create a `.dev.vars` file in the `worker/` directory with your keys:
-
-```
-ANTHROPIC_API_KEY=sk-ant-...
-ASSEMBLYAI_API_KEY=...
-ELEVENLABS_API_KEY=...
-ELEVENLABS_VOICE_ID=...
-```
-
-Then update the proxy URLs in the Swift code to point to `http://localhost:8787` instead of the deployed Worker URL while developing. Grep for `clicky-proxy` to find them all.
-
-### 3. Update the proxy URLs in the app
-
-The app has the Worker URL hardcoded in a few places. Search for `your-worker-name.your-subdomain.workers.dev` and replace it with your Worker URL:
-
-```bash
-grep -r "clicky-proxy" leanring-buddy/
-```
-
-You'll find it in:
-- `CompanionManager.swift` — Claude chat + ElevenLabs TTS
-- `AssemblyAIStreamingTranscriptionProvider.swift` — AssemblyAI token endpoint
-
-### 4. Open in Xcode and run
-
-```bash
-open leanring-buddy.xcodeproj
-```
-
-In Xcode:
-1. Select the `leanring-buddy` scheme (yes, the typo is intentional, long story)
-2. Set your signing team under Signing & Capabilities
-3. Hit **Cmd + R** to build and run
-
-The app will appear in your menu bar (not the dock). Click the icon to open the panel, grant the permissions it asks for, and you're good.
-
-### Permissions the app needs
-
-- **Microphone** — for push-to-talk voice capture
-- **Accessibility** — for the global keyboard shortcut (Control + Option)
-- **Screen Recording** — for taking screenshots when you use the hotkey
-- **Screen Content** — for ScreenCaptureKit access
-
-## Architecture
-
-If you want the full technical breakdown, read `CLAUDE.md`. But here's the short version:
-
-**Menu bar app** (no dock icon) with two `NSPanel` windows — one for the control panel dropdown, one for the full-screen transparent cursor overlay. Push-to-talk streams audio over a websocket to AssemblyAI, sends the transcript + screenshot to Claude via streaming SSE, and plays the response through ElevenLabs TTS. Claude can embed `[POINT:x,y:label:screenN]` tags in its responses to make the cursor fly to specific UI elements across multiple monitors. All three APIs are proxied through a Cloudflare Worker.
-
-## Project structure
-
-```
-leanring-buddy/          # Swift source (yes, the typo stays)
-  CompanionManager.swift    # Central state machine
-  CompanionPanelView.swift  # Menu bar panel UI
-  ClaudeAPI.swift           # Claude streaming client
-  ElevenLabsTTSClient.swift # Text-to-speech playback
-  OverlayWindow.swift       # Blue cursor overlay
-  AssemblyAI*.swift         # Real-time transcription
-  BuddyDictation*.swift     # Push-to-talk pipeline
-worker/                  # Cloudflare Worker proxy
-  src/index.ts              # Three routes: /chat, /tts, /transcribe-token
-CLAUDE.md                # Full architecture doc (agents read this)
-```
-
-## Contributing
-
-PRs welcome. If you're using Claude Code, it already knows the codebase — just tell it what you want to build and point it at `CLAUDE.md`.
-
-Got feedback? DM me on X [@farzatv](https://x.com/farzatv).
+Source and documentation belong in Git. Compiled apps, build caches, API credentials, environment secrets, and Codex auth storage stay outside the repository.

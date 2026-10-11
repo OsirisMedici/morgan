@@ -54,13 +54,13 @@ enum PersonalSmokeTests {
             print("PASS: Located Crop button at \(Int(coordinate.x)),\(Int(coordinate.y))")
 
             let voice = MacVoiceClient()
-            try await voice.speakText("Clicky Personal is connected to Codex. The Mac voice test is complete.")
+            try await voice.speakText("Morgan is connected to Codex. The Mac voice test is complete.")
             guard !voice.isPlaying else { throw PersonalClickyError(message: "Voice remained busy") }
             print("PASS: Mac speech playback completed")
-            print("PERSONAL_SMOKE_TEST_PASSED")
+            print("MORGAN_SMOKE_TEST_PASSED")
             NSApp.terminate(nil)
         } catch {
-            print("PERSONAL_SMOKE_TEST_FAILED: \(error.localizedDescription)")
+            print("MORGAN_SMOKE_TEST_FAILED: \(error.localizedDescription)")
             exit(1)
         }
     }

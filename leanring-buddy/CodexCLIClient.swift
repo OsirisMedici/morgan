@@ -37,7 +37,7 @@ final class CodexCLIClient {
         }
         let startTime = Date()
         let directory = FileManager.default.temporaryDirectory
-            .appendingPathComponent("clicky-personal-\(UUID().uuidString)", isDirectory: true)
+            .appendingPathComponent("morgan-request-\(UUID().uuidString)", isDirectory: true)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: directory) }
         let outputURL = directory.appendingPathComponent("answer.txt")

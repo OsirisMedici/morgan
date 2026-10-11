@@ -1,0 +1,8 @@
+🎙️ Transcription: using Apple Speech
+🎯 Morgan: Starting...
+🎯 Morgan: Version 0.1.1
+PASS: POINT parser, speech text separation, secondary-screen tag
+PASS: Existing Codex account answered synthetic screenshot in 5s
+PASS: Located Crop button at 1040,115
+PASS: Mac speech playback completed
+MORGAN_SMOKE_TEST_PASSED

@@ -6,3 +6,15 @@ build/
 releases/
 .claude/
 coding-plans/
+
+# Local credentials and packaged builds
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.dmg
+*.app/
+.codex/

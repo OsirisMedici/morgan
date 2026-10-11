@@ -65,8 +65,8 @@ final class MenuBarPanelManager: NSObject {
 
         guard let button = statusItem?.button else { return }
 
-        button.image = NSImage(systemSymbolName: "cursorarrow.rays", accessibilityDescription: "Clicky Personal")
-        button.toolTip = "Clicky Personal"
+        button.image = NSImage(systemSymbolName: "cursorarrow.rays", accessibilityDescription: "Morgan")
+        button.toolTip = "Morgan"
         button.image?.isTemplate = true
         button.action = #selector(statusItemClicked)
         button.target = self
@@ -160,7 +160,7 @@ final class MenuBarPanelManager: NSObject {
             defer: false
         )
 
-        menuBarPanel.title = "Clicky Personal"
+        menuBarPanel.title = "Morgan"
         menuBarPanel.isFloatingPanel = true
         menuBarPanel.level = .floating
         menuBarPanel.isOpaque = false

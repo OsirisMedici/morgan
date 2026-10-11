@@ -11,7 +11,7 @@ struct CompanionPanelView: View {
         VStack(alignment: .leading, spacing: 14) {
             HStack {
                 Image(systemName: "cursorarrow.rays").foregroundColor(DS.Colors.blue400)
-                Text("Clicky Personal").font(.headline)
+                Text("Morgan").font(.headline)
                 Spacer()
                 Text(statusText).font(.caption).foregroundColor(.secondary)
             }
